@@ -1,0 +1,33 @@
+{
+    "seed": 2026,
+    "scenarios": {
+        "gauss_10": {"kind": "gaussian", "sigma": 10},
+        "gauss_25": {"kind": "gaussian", "sigma": 25},
+        "salt_pepper": {"kind": "salt_pepper", "amount": 0.05},
+        "low_light": {"kind": "low_light", "gamma": 1.6, "gain": 0.7, "sigma": 8},
+        "color_cast": {"kind": "color_cast", "gains": [1.15, 1.0, 0.8], "sigma": 10}
+    },
+    "p1": {
+        "bilateral": {"radius": 2, "sigma_s": 2.5, "sigma_r_factor": 8.0},
+        "clahe": {"tiles": 4, "clip_limit": 1.5, "blend": 0.8},
+        "unsharp": {"sigma": 1.0, "amount": 0.2, "threshold": 6.0}
+    },
+    "p2": {
+        "gray_world": {"strength": 0.5, "norm": 8.0},
+        "pyramid": {"thresholds": [3.0, 1.5, 0.0]},
+        "butterworth": {"cutoff": 0.4, "order": 3}
+    },
+    "test_cases": {
+        "p1": ["gauss_25", "low_light"],
+        "p2": ["gauss_10", "color_cast"]
+    },
+    "min_psnr_gain": 1.0,
+    "tuning_grid": {
+        "bilateral": {"sigma_r_factor": [2.0, 4.0, 6.0, 8.0, 10.0, 14.0], "sigma_s": [1.5, 2.5, 3.5]},
+        "clahe": {"clip_limit": [1.5, 2.0, 3.0], "blend": [0.3, 0.5, 0.8]},
+        "unsharp": {"amount": [0.2, 0.4, 0.7], "threshold": [0.0, 3.0, 6.0]},
+        "gray_world": {"strength": [0.25, 0.5, 0.75, 1.0], "norm": [1.0, 4.0, 8.0]},
+        "pyramid": {"thresholds": [[3.0, 1.5, 0.0], [6.0, 3.0, 0.0], [10.0, 5.0, 0.0], [15.0, 8.0, 2.0]]},
+        "butterworth": {"cutoff": [0.2, 0.3, 0.4, 0.5, 0.65], "order": [1, 2, 3]}
+    }
+}
